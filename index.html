@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yuchen Ma</title>
+<meta name="description" content="Yuchen Ma, physical oceanographer and fluid dynamicist at DAMTP, University of Cambridge. Thermohaline staircases, internal waves and ice–ocean interfaces.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+[hidden] { display: none !important; }
+/* Layout: plain paper. White page, black type, hairline rules, one deep-blue link colour.
+   No tinted panels, no pills. STIX Two Text for headings and the statement, IBM Plex Sans for the rest. */
+:root {
+  --bg: #ffffff;
+  --fg: #111111;
+  --muted: #6b6b6b;
+  --line: #dcdcdc;
+  --line-strong: #111111;
+  --accent: #0b4f8a;
+  --display: "STIX Two Text", "Times New Roman", Georgia, serif;
+  --body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+  --measure: 64ch;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121212; --fg: #ebebeb; --muted: #9a9a9a; --line: #333333; --line-strong: #ebebeb; --accent: #7fb6e6; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121212; --fg: #ebebeb; --muted: #9a9a9a; --line: #333333; --line-strong: #ebebeb; --accent: #7fb6e6; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: var(--body); font-size: 17px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+img, video { max-width: 100%; height: auto; display: block; }
+h1, h2, h3 { font-family: var(--display); font-weight: 500; line-height: 1.15; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+
+.wrap {
+  max-width: 1120px; margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* Nav */
+.nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--bg); border-bottom: 1px solid var(--line-strong);
+}
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-block: 14px; }
+.brand { font-family: var(--display); font-size: 1.15rem; color: var(--fg); }
+.brand:hover { text-decoration: none; }
+.nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 4px 24px; flex-wrap: wrap; }
+.nav li a { color: var(--muted); font-size: 0.95rem; }
+.nav li a:hover, .nav li a[aria-current="true"] { color: var(--fg); text-decoration: none; }
+
+/* Sections */
+section { padding-block: 72px; border-top: 1px solid var(--line); }
+section:first-of-type { border-top: 0; }
+.eyebrow { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+h2 { font-size: clamp(1.7rem, 3.2vw, 2.3rem); margin-bottom: 28px; }
+h3 { font-size: 1.35rem; }
+.prose { max-width: var(--measure); }
+.prose p + p { margin-top: 1em; }
+.lede { font-family: var(--display); font-size: 1.25rem; line-height: 1.5; }
+
+/* Hero */
+.hero { padding-block: 56px 72px; }
+.hero .grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 48px; align-items: center; }
+.hero h1 { font-size: clamp(2.6rem, 6vw, 4.2rem); font-weight: 500; letter-spacing: -0.01em; }
+.hero .cn { font-family: var(--display); font-size: 1.3rem; color: var(--muted); margin-left: 0.5em; font-weight: 400; vertical-align: 0.4em; }
+.hero .role { color: var(--muted); font-size: 1rem; margin-top: 12px; }
+.hero .lede { margin-top: 26px; max-width: 46ch; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px;
+  border: 1px solid var(--line-strong); background: var(--bg); color: var(--fg); font-weight: 500; font-size: 0.95rem;
+}
+.btn:hover { text-decoration: none; background: var(--fg); color: var(--bg); }
+.btn.primary { background: var(--fg); color: var(--bg); }
+.btn.primary:hover { background: var(--bg); color: var(--fg); }
+.figure { margin: 0; }
+.figure video, .figure img { width: 100%; }
+.figure figcaption { font-size: 0.82rem; color: var(--muted); margin-top: 8px; line-height: 1.45; }
+
+
+/* About */
+.about { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 48px; align-items: start; }
+.portrait img { width: 100%; }
+.statement { font-family: var(--display); font-size: 1.17rem; line-height: 1.6; max-width: 62ch; }
+.statement p + p { margin-top: 1em; }
+
+
+/* Research tabs: a row of underlined headings */
+.tabs { display: flex; gap: 0 32px; flex-wrap: wrap; margin-bottom: 36px; border-bottom: 1px solid var(--line); }
+.tab {
+  font: inherit; font-family: var(--display); font-size: 1.1rem; cursor: pointer;
+  padding: 10px 0 12px; margin-bottom: -1px; border: 0; border-bottom: 2px solid transparent; background: none; color: var(--muted);
+}
+.tab:hover { color: var(--fg); }
+.tab[aria-selected="true"] { color: var(--fg); border-bottom-color: var(--fg); }
+.panel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); gap: 48px; align-items: start; }
+.panel .text { max-width: var(--measure); }
+.panel h3 { font-size: 1.6rem; margin-bottom: 16px; }
+.panel .q { font-family: var(--display); font-style: italic; font-size: 1.15rem; color: var(--muted); margin-bottom: 20px; }
+.panel p + p { margin-top: 1em; }
+.figs { display: grid; gap: 28px; }
+
+/* Publications */
+.filters { display: flex; gap: 0 22px; flex-wrap: wrap; margin-bottom: 28px; align-items: baseline; }
+.chip {
+  font: inherit; font-size: 0.92rem; cursor: pointer;
+  padding: 4px 0; border: 0; border-bottom: 2px solid transparent; background: none; color: var(--muted);
+}
+.chip:hover { color: var(--fg); }
+.chip[aria-pressed="true"] { color: var(--fg); border-bottom-color: var(--fg); }
+.pubyear { display: grid; grid-template-columns: 80px minmax(0, 1fr); gap: 16px; padding-block: 18px; border-top: 1px solid var(--line); }
+.pubyear:first-child { border-top: 0; padding-top: 0; }
+.pubyear .y { font-family: var(--mono); font-size: 0.9rem; color: var(--muted); padding-top: 3px; }
+.pubyear ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.pub { font-size: 0.95rem; line-height: 1.5; }
+.pub .t { font-weight: 500; }
+.pub .t a { color: var(--fg); }
+.pub .t a:hover { color: var(--accent); }
+.pub .a, .pub .j { color: var(--muted); }
+.pub .a b { color: var(--fg); font-weight: 500; }
+.pub .j em { font-style: italic; }
+.pub .note { display: inline-block; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--accent); margin-left: 8px; }
+.pub[hidden] { display: none; }
+.pubs-note { font-size: 0.9rem; color: var(--muted); margin-top: 24px; max-width: var(--measure); }
+.count { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); margin-left: auto; }
+
+/* CV */
+.cv { max-width: 760px; }
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; }
+.timeline li { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; padding-block: 14px; border-top: 1px solid var(--line); }
+.timeline li:first-child { border-top: 0; padding-top: 0; }
+.timeline .d { font-family: var(--mono); font-size: 0.85rem; color: var(--muted); padding-top: 2px; }
+.timeline .r { font-weight: 500; }
+.timeline .s { color: var(--muted); font-size: 0.93rem; }
+
+/* Contact */
+.contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+.rows { display: grid; gap: 14px; }
+.row { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 12px; align-items: baseline; font-size: 0.98rem; }
+.row .k { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.row .v { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; min-width: 0; }
+.copy { font: inherit; font-size: 0.78rem; cursor: pointer; padding: 2px 8px; border: 1px solid var(--line); background: var(--bg); color: var(--muted); }
+.copy:hover { border-color: var(--fg); color: var(--fg); }
+footer { border-top: 1px solid var(--line-strong); padding-block: 28px; color: var(--muted); font-size: 0.85rem; }
+footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+@media (max-width: 860px) {
+  .hero .grid, .panel, .contact { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .about { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .portrait { max-width: 200px; }
+      .hero .figure { max-width: 420px; }
+  section { padding-block: 56px; }
+}
+@media (max-width: 520px) {
+  body { font-size: 16px; }
+  .pubyear { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .timeline li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .row { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .tabs { gap: 0 20px; }
+}
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="#top">Yuchen Ma</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="top">
+
+<section class="hero">
+  <div class="wrap grid">
+    <div>
+      <h1>Yuchen Ma<span class="cn">马玉晨</span></h1>
+      <p class="role">Postdoctoral Associate · Department of Applied Mathematics and Theoretical Physics, University of Cambridge</p>
+      <p class="lede">I am a physicist who works on the ocean. I study turbulence and waves in the ocean interior and at its boundaries, with theory, numerical simulations and observations.</p>
+      <div class="actions">
+        <a class="btn primary" href="#research">What I work on</a>
+        <a class="btn" href="#publications">Publications</a>
+        <a class="btn" href="#contact">Get in touch</a>
+      </div>
+    </div>
+    <figure class="figure">
+      <img src="assets/ocean-currents.jpg" alt="Surface currents of the North Atlantic rendered as flowing white streaks on a dark blue ocean, with the Gulf Stream and its eddies">
+      <figcaption>Surface currents in the North Atlantic from NASA's <em>Perpetual Ocean</em>, built from the ECCO2 ocean model. Image: NASA/Goddard Space Flight Center Scientific Visualization Studio.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="about">
+      <div class="portrait">
+        <img src="assets/portrait.jpg" alt="Yuchen Ma">
+      </div>
+      <div>
+        <p class="eyebrow">About</p>
+        <div class="statement">
+          <p>My training was in physics, and I still think like a physicist. When I look at the ocean I want to understand why it does what it does, and I keep going until I can write the reason down, at least roughly.</p>
+          <p>The ocean is a good place for this kind of question. It has motions on all scales, from the basin-scale circulation down to turbulence of a few centimetres, and the small scales matter: they control how heat and salt are mixed, and through that what the large-scale circulation can do. What the ocean does for the climate, moving heat and carbon around the planet and melting ice at the edges, depends on processes in its interior and at its boundaries, where we have the fewest measurements and where climate models have to rely on parameterisations.</p>
+          <p>My questions usually come from observations. There is something interesting in the data, I try to find the mechanism behind it, and I write down a model that is simple enough to understand. I test the model with idealised simulations and go back to the observations to see whether they agree; when the question needs it I also do realistic modelling. A theory is only useful if it can be compared with what is actually measured, so I value observations a great deal, even though my own work is theory and modelling. This mix of applied mathematics, physics and earth science is geophysical fluid dynamics, and I am always happy to talk with people who work on fluids with similar tools.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="research">
+  <div class="wrap">
+    <p class="eyebrow">Research</p>
+    <h2>What I work on</h2>
+
+    <div class="tabs" role="tablist" aria-label="Research topics">
+      <button class="tab" role="tab" id="tab-staircases" aria-controls="panel-staircases" aria-selected="true">Arctic staircases</button>
+      <button class="tab" role="tab" id="tab-bbl" aria-controls="panel-bbl" aria-selected="false">Bottom boundary layer</button>
+      <button class="tab" role="tab" id="tab-ice" aria-controls="panel-ice" aria-selected="false">Ice–ocean interactions</button>
+      <button class="tab" role="tab" id="tab-dd" aria-controls="panel-dd" aria-selected="false">Double diffusion</button>
+      <button class="tab" role="tab" id="tab-energy" aria-controls="panel-energy" aria-selected="false">Energy pathways</button>
+      <button class="tab" role="tab" id="tab-iw" aria-controls="panel-iw" aria-selected="false">Internal waves</button>
+    </div>
+
+    <div class="panel" role="tabpanel" id="panel-staircases" aria-labelledby="tab-staircases">
+      <div class="text">
+        <h3>Why is the Arctic interior arranged in steps, and how much heat do they let through?</h3>
+        <p class="q">Below the Arctic sea ice there is enough heat to melt all of it. A strong salinity stratification, with staircases in it, keeps the heat down.</p>
+        <p>Warm Atlantic water sits a few hundred metres below the ice. It is held there by a strong salinity stratification, and within that stratification the temperature and salinity profiles are arranged in staircases: well-mixed layers separated by sharp interfaces. Each interface limits the upward heat flux, and the turbulence inside the layers is double-diffusive. Whether these staircases survive as the Arctic warms and freshens is part of what determines how fast the ice feels the heat below it.</p>
+        <p>In my PhD I proposed a mechanism for how the staircases form, an instability that appears when double diffusion and stratified turbulence act together, and tested it with direct numerical simulations. I then looked at how much heat passes through a staircase when turbulence is added. What I would like to know now is what happens to them as the Arctic changes.</p>
+      </div>
+      <div class="figs">
+        <figure class="figure">
+          <img src="assets/arctic-profile.png" style="max-width: 400px;" alt="Potential temperature and salinity against depth in the Arctic Ocean, with insets zooming on the staircase between 240 and 290 metres">
+          <figcaption>Temperature and salinity in the Arctic Ocean: cold water above, the warm Atlantic layer below, and in the insets the staircase in between, 240–290 m.</figcaption>
+        </figure>
+        <figure class="figure">
+          <video autoplay muted loop playsinline poster="assets/dns-cube-poster.jpg" style="max-width: 400px;" aria-label="Rotating cube of double-diffusive turbulence from a direct numerical simulation">
+            <source src="assets/dns-cube.mp4" type="video/mp4">
+          </video>
+          <figcaption>Double-diffusive turbulence in a direct numerical simulation.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="panel-bbl" aria-labelledby="tab-bbl" hidden>
+      <div class="text">
+        <h3>How does the ocean mix in its bottom boundary layer?</h3>
+        <p class="q">The deep ocean has to come back up along its sloping boundaries. The mixing that lifts it happens in a thin layer at the bottom, and we have only recently started to measure it.</p>
+        <p>Dense water sinks at the poles and fills the abyss. For the circulation to close it has to rise again, and the current picture is that it does so in the turbulent boundary layer along the sloping sea floor, where the tide works against rough topography. Canyons are where this is most intense. In 2021 the BLT (Boundary Layer Turbulence) experiment, a US–UK field programme funded by NSF and NERC, released dye near the floor of a canyon in the Rockall Trough, west of Ireland, and the dye rose at about a hundred metres per day.</p>
+        <p>The moorings in the canyon recorded a tidal current with a vertical structure that a propagating internal wave cannot explain. I found that the canyon acts as a resonator: the tide excites a standing internal wave between the canyon walls, and a model with only this mechanism reproduces the observations. The next steps are to extend these dynamics from the canyon to the sloping boundary more generally, and to quantify what canyon mixing does to the global circulation.</p>
+      </div>
+      <div class="figs">
+        <figure class="figure">
+          <img src="assets/canyon-map.jpg" alt="Three-dimensional view of the BLT canyon bathymetry in the Rockall Trough with the dye release point and its upward path, and an inset map locating the canyon west of Ireland">
+          <figcaption>The BLT canyon in the Rockall Trough. Dye released near the canyon floor rose at about 100 m per day.</figcaption>
+        </figure>
+        <figure class="figure">
+          <img src="assets/canyon-model-theory.jpg" alt="Amplitudes of velocity, buoyancy and pressure along the canyon from the simulation and from the standing-wave theory">
+          <figcaption>The standing wave: amplitudes of velocity, buoyancy and pressure along the canyon in a simulation (top rows) and in the theory (bottom row).</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="panel-ice" aria-labelledby="tab-ice" hidden>
+      <div class="text">
+        <h3>How does ocean turbulence carry heat to the ice?</h3>
+        <p class="q">Warm fjord water melts the ice. How fast depends on a turbulent boundary layer a few centimetres thick.</p>
+        <p>In summer 2026 the GIANT cruise on the RRS <em>Sir David Attenborough</em> went to the fjords of East Greenland to measure melting at a glacier face directly, with uncrewed vehicles surveying along the ice, moorings and profilers in the fjord, and instruments on the glacier. Subglacial discharge leaves the base of the glacier and rises along the ice face as a plume; the plume entrains warm fjord water and drives the melting. The photograph shows one of these plumes reaching the surface.</p>
+        <p>My part is the boundary layer at the ice face. I use large-eddy simulations that resolve the turbulence next to the ice to understand how this thin layer is maintained, how it transports heat to the ice as the flow changes from buoyancy-driven to shear-driven, and how to turn this into a melt parameterisation for ocean and climate models.</p>
+      </div>
+      <div class="figs">
+        <figure class="figure">
+          <img src="assets/plume-photo.jpg" alt="Aerial photograph of the ice face of Sorgenfri Glacier in East Greenland, with a red uncrewed surface vehicle approaching a circular patch where a subglacial discharge plume reaches the surface">
+          <figcaption>A subglacial discharge plume reaching the surface at the face of Sorgenfri Gletsjer, East Greenland, during the GIANT cruise in 2026; the DriX uncrewed vehicle surveys beside it. Photo: Pierre Dutrieux.</figcaption>
+        </figure>
+        <figure class="figure">
+          <video autoplay muted loop playsinline poster="assets/plume-les-poster.png" aria-label="Temperature anomaly next to a melting ice face in a large-eddy simulation" style="max-width: 300px;">
+            <source src="assets/plume-les.mp4" type="video/mp4">
+          </video>
+          <figcaption>The boundary layer in a large-eddy simulation: cold, fresh water rising along a vertical ice face (left edge) and mixing into the fjord.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="panel-dd" aria-labelledby="tab-dd" hidden>
+      <div class="text">
+        <h3>How does double-diffusive convection work, and what is its effect on the large-scale ocean?</h3>
+        <p class="q">Heat diffuses about a hundred times faster than salt. This makes a kind of turbulence that only exists when both of them set the density.</p>
+        <p>Seawater density depends on both temperature and salinity, and because the two diffuse at very different rates, a water column that is stable in density can still convect: salt fingers when warm salty water lies over cold fresh water, diffusive convection when it is the other way round. This is a special class of turbulence. It is driven by potential energy rather than shear, it has its own instabilities and length scales, and it tends to build large structures, layers, interfaces and staircases, out of small ones. Much of the mid- and low-latitude ocean is in one of these states. I want to understand how it works, from the instability to the mixing it produces, and then to say when it matters compared with everything else.</p>
+        <p>I have worked out the energetics of salt fingers, separating stirring from irreversible mixing and turning that into a parameterisation of the fluxes, and a theory for how salt-finger staircases form and merge, which matches twenty years of observations in the Mediterranean. What I am working on now is how horizontal stirring, with no unstable gradient in the vertical at all, can generate double-diffusive convection and transport buoyancy up the gradient.</p>
+      </div>
+      <div class="figs">
+        <figure class="figure">
+          <img src="assets/saltfinger-3stages.png" alt="Three stages of salt fingers in a direct numerical simulation: growth, breaking and turbulence">
+          <figcaption>Salt fingers in a direct numerical simulation: they grow, they break, they turn into turbulence.</figcaption>
+        </figure>
+        <figure class="figure">
+          <img src="assets/staircase-merger.png" alt="Theoretical temperature profiles of a salt-finger staircase forming and merging, beside twenty years of Mediterranean observations showing the same merging">
+          <figcaption>A staircase forms, then its steps merge. Left: the theory. Right: the Tyrrhenian Sea over twenty years.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="panel-energy" aria-labelledby="tab-energy" hidden>
+      <div class="text">
+        <h3>How does energy get from the large scales of the ocean down to the scale of mixing?</h3>
+        <p class="q">Energy enters the ocean at the scale of basins, eddies and tides, and the mixing happens at centimetres. What happens in between?</p>
+        <p>The ocean has many dynamical regimes: geostrophic eddies, submesoscale fronts, internal waves, stratified turbulence, three-dimensional turbulence. Each of them is reasonably well understood on its own. What we understand much less is how they are connected. Energy enters at large scales and is dissipated at small scales, but the route is not a simple cascade. Geostrophic turbulence moves energy to larger scales, not smaller, and the transfer into waves and turbulence happens at particular places through particular mechanisms. How energy is handed from one regime to the next, and how much goes each way, is the open part of the problem.</p>
+        <p>I have worked on this from two ends: with the Michigan team, high-resolution regional models that follow the internal-wave cascade down to its dissipation; and from microstructure data, where turbulent dissipation turns out to follow a lognormal mixture, a statistical fingerprint of more than one pathway at work. What I most want to understand next is the last link in the chain: how strongly stratified turbulence (the layered, anisotropic "LAST" regime) is generated from the waves and currents above it, and how it does the mixing.</p>
+      </div>
+      <div class="figs">
+        <figure class="figure">
+          <img src="assets/scale-diagram.png" alt="Length scale against time scale of ocean processes, from molecular diffusion through turbulence, stratified turbulence, the internal-wave continuum and internal tide up to eddies, gyres and the overturning circulation, with the energy pathway from the tide to turbulence marked">
+          <figcaption>The scales of the ocean. The question is how energy travels down the marked paths, from the internal tide and the submesoscale through the wave continuum and stratified turbulence to where it is finally mixed away.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="panel" role="tabpanel" id="panel-iw" aria-labelledby="tab-iw" hidden>
+      <div class="text">
+        <h3>How are internal waves generated, how do they propagate, and how do they break?</h3>
+        <p class="q">Internal waves are the waves on the density stratification of the ocean. Most of the mixing in the interior happens where they break.</p>
+        <p>Internal waves come in many kinds: internal tides, hundreds of kilometres long, generated where the tide flows over ridges and canyons; near-inertial waves generated by storms at the surface; lee waves over rough topography in a deep current; and a continuum of smaller waves that exchange energy among themselves. Most of the turbulence in the ocean interior comes from these waves breaking, so they are at the centre of the mixing problem.</p>
+        <p>Their dynamics are complicated, and this is what makes them interesting fluid problems: how a wave is generated, how it propagates and scatters, how it passes its energy to other waves and in the end to turbulence. These questions come up in most of what I do, and I am interested in them for their own sake.</p>
+      </div>
+      <div class="figs">
+        <figure class="figure">
+          <img src="assets/internal-waves-whalen.jpg" alt="Schematic of internal wave generation by storms, winds, tides and deep currents over topography, their propagation and interactions, and their breaking that drives mixing">
+          <figcaption>The life of an internal wave: generation by wind, tide and deep currents over topography, propagation, interaction, scattering, and breaking. From Whalen et al. (2020), <em>Nature Reviews Earth &amp; Environment</em>.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="publications">
+  <div class="wrap">
+    <p class="eyebrow">Publications</p>
+    <h2>Papers</h2>
+    <div class="filters" id="filters">
+      <button class="chip" data-f="all" aria-pressed="true">All</button>
+      <button class="chip" data-f="first" aria-pressed="false">First author</button>
+      <button class="chip" data-f="arctic" aria-pressed="false">Arctic staircases</button>
+      <button class="chip" data-f="bbl" aria-pressed="false">Bottom boundary layer</button>
+      <button class="chip" data-f="ice" aria-pressed="false">Ice–ocean interactions</button>
+      <button class="chip" data-f="dd" aria-pressed="false">Double diffusion</button>
+      <button class="chip" data-f="energy" aria-pressed="false">Energy pathways</button>
+      <button class="chip" data-f="iw" aria-pressed="false">Internal waves</button>
+      <span class="count" id="count"></span>
+    </div>
+    <div id="publist"></div>
+    <p class="pubs-note">Two papers were highlighted as Editors' Suggestions in <em>Physical Review Fluids</em>. The staircase work was covered by <a href="https://www.utoronto.ca/news/researchers-identify-mechanism-responsible-temperature-and-salinity-staircases-arctic-ocean" target="_blank" rel="noopener">U of T News</a> and <em>The Guardian</em>.</p>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <p class="eyebrow">Experience</p>
+    <h2>Where I have been</h2>
+    <div class="cv">
+      <ul class="timeline">
+        <li><span class="d">2025 –</span><span><span class="r">Postdoctoral Associate, University of Cambridge</span><br><span class="s">DAMTP, with John R. Taylor. Turbulence and melt at Greenland ice–ocean interfaces.</span></span></li>
+        <li><span class="d">2023 – 2025</span><span><span class="r">Postdoctoral Associate, Massachusetts Institute of Technology</span><br><span class="s">EAPS, with Raffaele Ferrari. Turbulence and internal waves at the ocean bottom.</span></span></li>
+        <li><span class="d">2023</span><span><span class="r">Postdoctoral Associate, University of Toronto</span><br><span class="s">Physics, with W. Richard Peltier. Turbulence in thermohaline staircases.</span></span></li>
+        <li><span class="d">2016 – 2022</span><span><span class="r">Ph.D. in Physics, University of Toronto</span><br><span class="s">Supervised by W. Richard Peltier. Double-diffusive turbulence and the formation of thermohaline staircases.</span></span></li>
+        <li><span class="d">2012 – 2016</span><span><span class="r">B.Sc. in Theoretical Physics, University of Science and Technology of China</span><br><span class="s">Yan Jici Talent Students Program in Physics.</span></span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <p class="eyebrow">Contact</p>
+    <h2>Come and talk</h2>
+    <div class="contact">
+      <div class="prose">
+        <p>I am generally interested in physical oceanography, fluid mechanics and climate science, and happy to talk about any of them. Write to me.</p>
+      </div>
+      <div class="rows">
+        <div class="row"><span class="k">Email</span><span class="v"><span id="email">ym460@cam.ac.uk</span><button class="copy" data-copy="ym460@cam.ac.uk" type="button">Copy</button></span></div>
+        <div class="row"><span class="k">Office</span><span class="v">Centre for Mathematical Sciences, Wilberforce Road, Cambridge CB3 0WA, UK</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Yuchen Ma</span>
+    <span>Updated November 2026</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Research tabs
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  function select(tab) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { select(t); });
+    t.addEventListener('keydown', function (e) {
+      var j = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : -1;
+      if (j < 0 && e.key !== 'ArrowLeft') return;
+      j = (j + tabs.length) % tabs.length; tabs[j].focus(); select(tabs[j]);
+    });
+  });
+  select(tabs[0]);
+
+  // Publications
+  var P = [
+    {y:2026, f:1, t:'arctic dd', a:'<b>Ma, Y.</b>, Peltier, W. R., &amp; Alford, M. H.', ti:'Thermohaline staircases in the ocean: Initiation, evolution, and structure', j:'<em>Annual Review of Fluid Mechanics</em>, 59', d:'10.1146/annurev-fluid-120624-124639'},
+    {y:2026, f:1, t:'bbl iw', a:'<b>Ma, Y.</b>, &amp; Ferrari, R.', ti:'A simple model for tidally forced standing waves in a submarine canyon', j:'<em>Journal of Physical Oceanography</em>, 56(10), 2423–2443', d:'10.1175/JPO-D-26-0005.1'},
+    {y:2026, f:1, t:'energy iw', a:'<b>Ma, Y.</b>, Ferrari, R., Polzin, K., &amp; Caulfield, C. C. P.', ti:'Lognormal mixture distribution describes oceanic turbulent dissipation', j:'<em>Journal of Physical Oceanography</em>, 56(7), 1469–1480', d:'10.1175/JPO-D-25-0286.1'},
+    {y:2026, f:1, t:'bbl iw', a:'<b>Ma, Y.</b>, Ferrari, R., Polzin, K., Alford, M. H., Naveira Garabato, A. C., &amp; Voet, G.', ti:'Standing wave–induced tidal shear in a submarine canyon in the Rockall Trough', j:'<em>Journal of Physical Oceanography</em>, 56(3), 665–680', d:'10.1175/JPO-D-25-0135.1'},
+    {y:2026, f:0, t:'energy iw', a:'Momeni, K., Peltier, W. R., Skitka, J., <b>Ma, Y.</b>, Arbic, B. K., Menemenlis, D., &amp; Pan, Y.', ti:'An alternative buoyancy Reynolds number-based inference of ocean diapycnal diffusivity due to internal wave breaking: Results from a high resolution regional ocean model', j:'<em>Geophysical Research Letters</em>, 53(10), e2025GL119061', d:'10.1029/2025GL119061'},
+    {y:2025, f:0, t:'bbl', a:'Naveira Garabato, A. C., Spingys, C. P., Castro, B. F., Couto, N., Drake, H. F., Forryan, A., Gao, Z., <b>Ma, Y.</b>, Mercier, H., Messias, M. J., &amp; Ruan, X.', ti:'Connecting mixing to upwelling along the ocean\'s sloping boundary', j:'<em>Geophysical Research Letters</em>, 52(22), e2025GL119186', d:'10.1029/2025GL119186'},
+    {y:2024, f:1, t:'arctic', a:'<b>Ma, Y.</b>, &amp; Peltier, W. R.', ti:'Diffusive-convection staircases in the polar oceans: The interplay between double diffusion and turbulence', j:'<em>Journal of Fluid Mechanics</em>, 984, A25', d:'10.1017/jfm.2024.224'},
+    {y:2024, f:0, t:'energy iw', a:'Skitka, J., Arbic, B. K., <b>Ma, Y.</b>, Momeni, K., Pan, Y., Peltier, W. R., Menemenlis, D., &amp; Thakur, R.', ti:'Internal-wave dissipation mechanisms and vertical structure in a high-resolution regional ocean model', j:'<em>Geophysical Research Letters</em>, 51(17), e2023GL108039', d:'10.1029/2023GL108039'},
+    {y:2024, f:0, t:'energy iw', a:'Momeni, K., <b>Ma, Y.</b>, Peltier, W. R., Thakur, R., Pan, Y., Menemenlis, D., Arbic, B. K., &amp; Skitka, J.', ti:'Breaking internal waves and ocean diapycnal diffusivity in a high-resolution regional ocean model: Evidence of a wave-turbulence cascade', j:'<em>Journal of Geophysical Research: Oceans</em>, 129(6), e2023JC020509', d:'10.1029/2023JC020509'},
+    {y:2024, f:0, t:'energy iw', a:'Skitka, J., Arbic, B. K., Thakur, R., Menemenlis, D., Peltier, W. R., Pan, Y., Momeni, K., &amp; <b>Ma, Y.</b>', ti:'Probing the nonlinear interactions of supertidal internal waves using a high-resolution regional ocean model', j:'<em>Journal of Physical Oceanography</em>, 54(2), 399–425', d:'10.1175/JPO-D-22-0236.1'},
+    {y:2022, f:1, t:'arctic', n:'Editors\' Suggestion', a:'<b>Ma, Y.</b>, &amp; Peltier, W. R.', ti:'Thermohaline-turbulence instability and thermohaline staircase formation in the polar oceans', j:'<em>Physical Review Fluids</em>, 7, 083801', d:'10.1103/PhysRevFluids.7.083801'},
+    {y:2022, f:1, t:'arctic', a:'<b>Ma, Y.</b>, &amp; Peltier, W. R.', ti:'Diapycnal diffusivities in Kelvin–Helmholtz engendered turbulent mixing: The diffusive-convection regime in the Arctic Ocean', j:'<em>Journal of Fluid Mechanics</em>, 946, A32', d:'10.1017/jfm.2022.590'},
+    {y:2022, f:1, t:'arctic', a:'<b>Ma, Y.</b>, &amp; Peltier, W. R.', ti:'Thermohaline staircase formation in the diffusive convection regime: A theory based upon stratified turbulence asymptotics', j:'<em>Journal of Fluid Mechanics</em>, 931, R4', d:'10.1017/jfm.2021.945'},
+    {y:2022, f:0, t:'energy iw', a:'Thakur, R., Arbic, B. K., Menemenlis, D., Momeni, K., Pan, Y., Peltier, W. R., Skitka, J., Alford, M. H., &amp; <b>Ma, Y.</b>', ti:'Impact of vertical mixing parameterizations on internal gravity wave spectra in regional ocean models', j:'<em>Geophysical Research Letters</em>, 49, e2022GL099614', d:'10.1029/2022GL099614'},
+    {y:2021, f:1, t:'dd', n:'Editors\' Suggestion', a:'<b>Ma, Y.</b>, &amp; Peltier, W. R.', ti:'Gamma instability in an inhomogeneous environment and salt-fingering staircase trapping: Determining the step size', j:'<em>Physical Review Fluids</em>, 6, 033903', d:'10.1103/PhysRevFluids.6.033903'},
+    {y:2021, f:1, t:'dd', a:'<b>Ma, Y.</b>, &amp; Peltier, W. R.', ti:'Parametrization of irreversible diapycnal diffusivity in salt-fingering turbulence using DNS', j:'<em>Journal of Fluid Mechanics</em>, 911, A9', d:'10.1017/jfm.2020.1018'},
+    {y:2020, f:0, t:'other', a:'Peltier, W. R., <b>Ma, Y.</b>, &amp; Chandan, D.', ti:'The KPP trigger of rapid AMOC intensification in the non-linear Dansgaard–Oeschger relaxation oscillation', j:'<em>Journal of Geophysical Research: Oceans</em>, 125(5), e2019JC015557', d:'10.1029/2019JC015557'}
+  ];
+  var prep = [
+    {f:1, t:'ice', a:'<b>Ma, Y.</b>, Holland, P. R., Zhao, K., Nash, J., Dutrieux, P., &amp; Taylor, J. R.', ti:'Transition from buoyancy-driven to shear-driven melting in a buoyant plume at a vertical ice face', j:'Preprint, <em>EarthArXiv</em>, 2026', d:'10.31223/X5BJ82'},
+    {f:1, t:'dd', a:'<b>Ma, Y.</b>, Taylor, J. R., et al.', ti:'Up-gradient buoyancy transport from horizontal stirring: double-diffusive convection without unstable gradients', j:'In preparation'},
+    {f:0, t:'arctic', a:'Chai, X., <b>Ma, Y.</b>, Xie, J., &amp; Wang, Y.', ti:'Formation of diffusive-convection staircases within double-core eddies in the Canada Basin: Observations and numerical simulations', j:'Submitted to <em>Journal of Physical Oceanography</em>'}
+  ];
+  function item(p) {
+    var title = p.d ? '<a href="https://doi.org/' + p.d + '" target="_blank" rel="noopener">' + p.ti + '</a>' : p.ti;
+    return '<li class="pub" data-f="' + p.t + '" data-first="' + p.f + '">' +
+      '<div class="t">' + title + (p.n ? '<span class="note">' + p.n + '</span>' : '') + '</div>' +
+      '<div class="a">' + p.a + '</div><div class="j">' + p.j + '</div></li>';
+  }
+  var years = []; P.forEach(function (p) { if (years.indexOf(p.y) < 0) years.push(p.y); });
+  var html = '<div class="pubyear"><div class="y">Soon</div><ol>' + prep.map(item).join('') + '</ol></div>';
+  years.forEach(function (y) {
+    html += '<div class="pubyear"><div class="y">' + y + '</div><ol>' + P.filter(function (p) { return p.y === y; }).map(item).join('') + '</ol></div>';
+  });
+  document.getElementById('publist').innerHTML = html;
+
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+  var count = document.getElementById('count');
+  function filter(f) {
+    chips.forEach(function (c) { c.setAttribute('aria-pressed', c.dataset.f === f ? 'true' : 'false'); });
+    var n = 0;
+    Array.prototype.forEach.call(document.querySelectorAll('.pub'), function (li) {
+      var show = f === 'all' || (f === 'first' ? li.dataset.first === '1' : li.dataset.f.split(' ').indexOf(f) >= 0);
+      li.hidden = !show; if (show) n++;
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('.pubyear'), function (g) {
+      g.hidden = !g.querySelector('.pub:not([hidden])');
+    });
+    count.textContent = n + (n === 1 ? ' paper' : ' papers');
+  }
+  chips.forEach(function (c) { c.addEventListener('click', function () { filter(c.dataset.f); }); });
+  filter('all');
+
+  // Copy buttons
+  Array.prototype.forEach.call(document.querySelectorAll('.copy'), function (b) {
+    b.addEventListener('click', function () {
+      var text = b.dataset.copy, done = function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1500); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () {
+          var r = document.createRange(); r.selectNodeContents(b.previousElementSibling);
+          var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        });
+      }
+    });
+  });
+
+  // Nav highlight
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav li a'));
+  var secs = links.map(function (l) { return document.querySelector(l.getAttribute('href')); });
+  function hl() {
+    var y = window.scrollY + 120, cur = -1;
+    secs.forEach(function (s, i) { if (s && s.offsetTop <= y) cur = i; });
+    links.forEach(function (l, i) { if (i === cur) l.setAttribute('aria-current', 'true'); else l.removeAttribute('aria-current'); });
+  }
+  window.addEventListener('scroll', hl, { passive: true }); hl();
+})();
+</script>
+</body>
+</html>
